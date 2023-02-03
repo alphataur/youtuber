@@ -1,31 +1,21 @@
-const yt = require("youtube-search-without-api-key")
-const express = require("express")
-const morgan = require("morgan")
-const app = express()
-
-morgan(':method :url :status :res[content-length] - :response-time ms')
-
-
-app.get("/alexa", async (req, res) => {
-  let query = req.query.sterm
-  if(query === undefined) return res.json({ success: false, error: "no search term provided" })
-  let result = await searchMusic(query)
-  return res.json({ success: true, error: false, data: result})
-})
-
-async function searchMusic(query){
-  try{
-    const results = await yt.search(query)
-    if(results.length === 0){
-      throw new Error("empty result from youtube")
-    }
-    else{
-      return results[0]
-    }
-  }
-  catch(e){
-    return null
+{
+  "name": "usi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chatgpt": "^3.5.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "puppeteer": "^19.6.2",
+    "puppeteer-extra": "^3.3.4",
+    "snoowrap": "^1.23.0",
+    "youtube-search-without-api-key": "1.0.7"
   }
 }
-
-app.listen(7292)
