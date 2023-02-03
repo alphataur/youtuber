@@ -3,7 +3,7 @@ const express = require("express")
 const morgan = require("morgan")
 const app = express()
 
-morgan(':method :url :status :res[content-length] - :response-time ms')
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 
 app.get("/alexa", async (req, res) => {
@@ -28,4 +28,6 @@ async function searchMusic(query){
   }
 }
 
-app.listen(7292)
+app.listen(8080, () => {
+  console.log("listening on port 8080")
+})
